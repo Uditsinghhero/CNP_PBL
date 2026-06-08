@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI DASH Streaming QoS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+</head>
+<body>
+    <header class="topbar">
+        <div>
+            <h1>AI-Driven Adaptive DASH Streaming</h1>
+            <p>Real MPEG-DASH playback with ML bitrate prediction and live QoS monitoring</p>
+        </div>
+        <div class="status-pill" id="manifestStatus">
+            {% if manifest_ready %}Manifest ready{% else %}Run generate_dash.py{% endif %}
+        </div>
+    </header>
+
+    <main class="layout">
+        <section class="player-section">
+            <div class="runtime-status" id="runtimeStatus">Dashboard loading...</div>
+            {% if manifest_ready %}
+            <video id="videoPlayer" controls autoplay muted playsinline></video>
+            {% else %}
+            <div class="missing-video">
+                <h2>DASH files not generated yet</h2>
+                <p>Run <code>python generate_dash.py</code>, then refresh this page.</p>
+            </div>
+            {% endif %}
+
+            <div class="controls-row">
+                <label class="switch">
+                    <input id="aiToggle" type="checkbox" checked>
+                    <span>AI control</span>
+                </label>
+                <label class="select-label">
+                    Network profile
+                    <select id="networkProfile">
+                        <option value="stable">Stable 4G</option>
+                        <option value="medium">Busy Wi-Fi</option>
+                        <option value="poor">Congested 3G</option>
+                        <option value="lossy">Packet loss demo</option>
+                    </select>
+                </label>
+                <button id="resetCharts" type="button">Reset graphs</button>
+            </div>
+        </section>
+
+        <section class="metrics-grid" aria-label="QoS metrics">
+            <article class="metric">
+                <span>Throughput</span>
+                <strong id="throughputValue">0.00 Mbps</strong>
+            </article>
+            <article class="metric">
+                <span>Buffer</span>
+                <strong id="bufferValue">0.00 s</strong>
+            </article>
+            <article class="metric">
+                <span>RTT</span>
+                <strong id="latencyValue">0 ms</strong>
+            </article>
+            <article class="metric">
+                <span>AI Quality</span>
+                <strong id="qualityValue">--</strong>
+            </article>
+            <article class="metric">
+                <span>Confidence</span>
+                <strong id="confidenceValue">0%</strong>
+            </article>
+            <article class="metric">
+                <span>Decision</span>
+                <strong id="reasonValue">waiting</strong>
+            </article>
+        </section>
+
+        <section class="charts">
+            <div class="chart-panel">
+                <canvas id="throughputChart"></canvas>
+            </div>
+            <div class="chart-panel">
+                <canvas id="bitrateChart"></canvas>
+            </div>
+            <div class="chart-panel">
+                <canvas id="bufferChart"></canvas>
+            </div>
+            <div class="chart-panel">
+                <canvas id="latencyChart"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        window.APP_CONFIG = {
+            manifestReady: {{ manifest_ready | tojson }},
+            manifestUrl: "{{ url_for('dash_file', filename='manifest.mpd') }}",
+            qualities: {{ qualities | tojson }}
+        };
+    </script>
+    <script src="{{ url_for('static', filename='js/player.js') }}?v=5"></script>
+</body>
+</html>
