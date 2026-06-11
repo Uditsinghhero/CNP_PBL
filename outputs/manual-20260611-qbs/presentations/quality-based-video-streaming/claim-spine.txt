@@ -11,3 +11,4 @@ Arc: problem -> built pipeline -> AI decision logic -> runtime integration -> me
 7. Dashboard: The demo exposes both the player and operator controls for network profile and AI-vs-dash.js comparison. Proof: dashboard capability map.
 8. Results: Logged sessions show the model operating under constrained throughput with high average confidence. Proof: QoS metric rail plus generated charts.
 9. Demo and close: The presentation should show stable, poor, and lossy profiles, then compare AI control with dash.js ABR. Proof: demo script and future work.
+10. Novelty: The project now adds a hybrid QoS-Risk Guard around ML prediction, giving safer adaptive choices than older throughput-only, buffer-only, or plain classifier approaches. Proof: comparison matrix and methodology block.

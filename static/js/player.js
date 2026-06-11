@@ -272,6 +272,8 @@ async function logDecision(metrics, decision, mode) {
         selected_quality: decision.quality_index,
         selected_bitrate_kbps: decision.bitrate_kbps,
         confidence: decision.confidence,
+        risk_score: decision.risk_score || 0,
+        protection_action: decision.protection_action || "",
         reason: decision.reason
     };
     try {

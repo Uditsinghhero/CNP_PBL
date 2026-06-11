@@ -1,7 +1,7 @@
 {
   "output": "C:\\Users\\acer\\OneDrive\\Desktop\\CNP PBL\\outputs\\manual-20260611-qbs\\presentations\\quality-based-video-streaming\\output\\AI-Driven-Adaptive-DASH-Streaming-QoS.pptx",
-  "outputBytes": 122633,
-  "slideCount": 9,
+  "outputBytes": 128100,
+  "slideCount": 10,
   "slideSize": {
     "width": 1280,
     "height": 720
@@ -16,7 +16,8 @@
     "C:\\Users\\acer\\OneDrive\\Desktop\\CNP PBL\\outputs\\manual-20260611-qbs\\presentations\\quality-based-video-streaming\\preview\\slide-06.png",
     "C:\\Users\\acer\\OneDrive\\Desktop\\CNP PBL\\outputs\\manual-20260611-qbs\\presentations\\quality-based-video-streaming\\preview\\slide-07.png",
     "C:\\Users\\acer\\OneDrive\\Desktop\\CNP PBL\\outputs\\manual-20260611-qbs\\presentations\\quality-based-video-streaming\\preview\\slide-08.png",
-    "C:\\Users\\acer\\OneDrive\\Desktop\\CNP PBL\\outputs\\manual-20260611-qbs\\presentations\\quality-based-video-streaming\\preview\\slide-09.png"
+    "C:\\Users\\acer\\OneDrive\\Desktop\\CNP PBL\\outputs\\manual-20260611-qbs\\presentations\\quality-based-video-streaming\\preview\\slide-09.png",
+    "C:\\Users\\acer\\OneDrive\\Desktop\\CNP PBL\\outputs\\manual-20260611-qbs\\presentations\\quality-based-video-streaming\\preview\\slide-10.png"
   ],
   "layoutDir": "C:\\Users\\acer\\OneDrive\\Desktop\\CNP PBL\\outputs\\manual-20260611-qbs\\presentations\\quality-based-video-streaming\\layout\\final",
   "layoutResults": [
@@ -46,6 +47,9 @@
     },
     {
       "layoutPath": "C:\\Users\\acer\\OneDrive\\Desktop\\CNP PBL\\outputs\\manual-20260611-qbs\\presentations\\quality-based-video-streaming\\layout\\final\\slide-09.layout.json"
+    },
+    {
+      "layoutPath": "C:\\Users\\acer\\OneDrive\\Desktop\\CNP PBL\\outputs\\manual-20260611-qbs\\presentations\\quality-based-video-streaming\\layout\\final\\slide-10.layout.json"
     }
   ],
   "slides": [
@@ -102,6 +106,12 @@
       "requestedSlideNumber": 9,
       "modulePath": "C:\\Users\\acer\\OneDrive\\Desktop\\CNP PBL\\outputs\\manual-20260611-qbs\\presentations\\quality-based-video-streaming\\slides\\slide-09.mjs",
       "exportName": "slide09"
+    },
+    {
+      "index": 10,
+      "requestedSlideNumber": 10,
+      "modulePath": "C:\\Users\\acer\\OneDrive\\Desktop\\CNP PBL\\outputs\\manual-20260611-qbs\\presentations\\quality-based-video-streaming\\slides\\slide-10.mjs",
+      "exportName": "slide10"
     }
   ]
 }

@@ -14,6 +14,23 @@ BASE_DIR = Path(__file__).resolve().parent
 DASH_DIR = BASE_DIR / "media" / "dash"
 LOG_DIR = BASE_DIR / "logs"
 LOG_FILE = LOG_DIR / "session_metrics.csv"
+LOG_COLUMNS = [
+    "timestamp",
+    "mode",
+    "throughput_mbps",
+    "previous_throughput_mbps",
+    "buffer_sec",
+    "latency_ms",
+    "packet_loss_pct",
+    "jitter_ms",
+    "current_quality",
+    "selected_quality",
+    "selected_bitrate_kbps",
+    "confidence",
+    "risk_score",
+    "protection_action",
+    "reason",
+]
 
 app = Flask(__name__)
 
@@ -23,23 +40,27 @@ def ensure_log_file() -> None:
     if not LOG_FILE.exists():
         with LOG_FILE.open("w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
-            writer.writerow(
-                [
-                    "timestamp",
-                    "mode",
-                    "throughput_mbps",
-                    "previous_throughput_mbps",
-                    "buffer_sec",
-                    "latency_ms",
-                    "packet_loss_pct",
-                    "jitter_ms",
-                    "current_quality",
-                    "selected_quality",
-                    "selected_bitrate_kbps",
-                    "confidence",
-                    "reason",
-                ]
-            )
+            writer.writerow(LOG_COLUMNS)
+        return
+
+    with LOG_FILE.open("r", newline="", encoding="utf-8") as f:
+        rows = list(csv.reader(f))
+    if not rows or rows[0] == LOG_COLUMNS:
+        return
+
+    existing_header = rows[0]
+    missing_columns = [column for column in LOG_COLUMNS if column not in existing_header]
+    if not missing_columns:
+        return
+
+    updated_rows = [LOG_COLUMNS]
+    for row in rows[1:]:
+        record = {column: row[index] if index < len(row) else "" for index, column in enumerate(existing_header)}
+        updated_rows.append([record.get(column, "") for column in LOG_COLUMNS])
+
+    with LOG_FILE.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerows(updated_rows)
 
 
 @app.route("/")
@@ -94,6 +115,8 @@ def log_metrics():
                 payload.get("selected_quality", 0),
                 payload.get("selected_bitrate_kbps", 0),
                 payload.get("confidence", 0),
+                payload.get("risk_score", 0),
+                payload.get("protection_action", ""),
                 payload.get("reason", ""),
             ]
         )

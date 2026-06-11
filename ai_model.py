@@ -24,6 +24,8 @@ class PredictionResult:
     bitrate_kbps: int
     confidence: float
     accuracy: float
+    risk_score: float
+    protection_action: str
     reason: str
 
 
@@ -39,6 +41,27 @@ class AIBitratePredictor:
         )
         self.accuracy = 0.0
         self._train()
+
+    def _risk_score(self, features: np.ndarray) -> float:
+        throughput, previous, buffer, latency, packet_loss, jitter, _ = features[0]
+        throughput_drop = max(0.0, (previous - throughput) / max(previous, 0.1))
+        risk = (
+            max(0.0, (3.5 - buffer) / 3.5) * 0.35
+            + min(1.0, throughput_drop) * 0.2
+            + max(0.0, (latency - 120) / 180) * 0.15
+            + max(0.0, (packet_loss - 2.5) / 6.5) * 0.18
+            + max(0.0, (jitter - 35) / 65) * 0.12
+        )
+        return float(np.clip(risk, 0.0, 1.0))
+
+    def _guarded_quality(self, predicted: int, risk_score: float, current_quality: int) -> tuple[int, str]:
+        if risk_score >= 0.72:
+            return min(predicted, max(0, current_quality - 1)), "risk guard: emergency downshift/cap"
+        if risk_score >= 0.48:
+            return min(predicted, current_quality), "risk guard: hold or cap quality"
+        if risk_score >= 0.30 and predicted > current_quality + 1:
+            return current_quality + 1, "risk guard: gradual upgrade"
+        return predicted, "ml decision accepted"
 
     def _train(self) -> None:
         rng = np.random.default_rng(42)
@@ -117,8 +140,15 @@ class AIBitratePredictor:
         )
         predicted = int(self.model.predict(features)[0])
         probabilities = self.model.predict_proba(features)[0]
+        current_quality = int(features[0][6])
+        risk_score = self._risk_score(features)
+        guarded, protection_action = self._guarded_quality(
+            predicted,
+            risk_score,
+            current_quality,
+        )
         confidence = float(probabilities[predicted])
-        quality = QUALITY_LEVELS[predicted]
+        quality = QUALITY_LEVELS[guarded]
 
         reasons = []
         if features[0][2] < 3:
@@ -127,15 +157,19 @@ class AIBitratePredictor:
             reasons.append("limited throughput")
         if features[0][4] > 3:
             reasons.append("packet loss")
+        if guarded != predicted:
+            reasons.append(protection_action)
         if not reasons:
             reasons.append("stable network")
 
         return PredictionResult(
-            quality_index=predicted,
+            quality_index=guarded,
             quality_label=quality["label"],
             bitrate_kbps=quality["bitrate_kbps"],
             confidence=round(confidence, 3),
             accuracy=round(self.accuracy, 3),
+            risk_score=round(risk_score, 3),
+            protection_action=protection_action,
             reason=", ".join(reasons),
         )
 
