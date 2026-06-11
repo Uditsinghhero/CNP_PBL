@@ -1,0 +1,13 @@
+Thesis: The project turns MPEG-DASH playback into a measurable adaptive streaming system where an ML controller chooses video quality from live QoS signals.
+Audience: faculty/project evaluators and technical peers.
+Arc: problem -> built pipeline -> AI decision logic -> runtime integration -> measured results -> demo and next steps.
+
+1. Cover: Quality-based video streaming becomes controllable when QoS telemetry is part of every decision. Proof: project component rail and QoS metrics.
+2. Need: Fixed or reactive quality changes fail when bandwidth, latency, jitter, and loss move together. Proof: risk matrix.
+3. Architecture: The implementation closes the loop between browser telemetry, ML prediction, DASH playback, and logging. Proof: system diagram.
+4. Encoding: FFmpeg creates a real multi-bitrate DASH ladder, not a mock stream. Proof: variant ladder and manifest/segment flow.
+5. AI model: Random Forest maps seven live features to four playable quality levels. Proof: feature-to-decision map.
+6. Control loop: Every two seconds the browser measures QoS, asks Flask for a prediction, applies quality, and logs evidence. Proof: loop diagram.
+7. Dashboard: The demo exposes both the player and operator controls for network profile and AI-vs-dash.js comparison. Proof: dashboard capability map.
+8. Results: Logged sessions show the model operating under constrained throughput with high average confidence. Proof: QoS metric rail plus generated charts.
+9. Demo and close: The presentation should show stable, poor, and lossy profiles, then compare AI control with dash.js ABR. Proof: demo script and future work.

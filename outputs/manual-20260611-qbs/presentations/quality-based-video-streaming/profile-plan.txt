@@ -1,0 +1,9 @@
+task mode: create
+primary deck-profile: engineering-platform
+secondary gates: product-platform, because the deck explains a usable dashboard and streaming workflow
+required proof objects: system architecture, encoding ladder, ML feature-to-quality map, control loop, logged QoS summary, result graphs
+source requirements: local README, Flask server, Random Forest predictor, DASH generator, browser player, analyze_results output, results/qos_summary.csv
+asset requirements: local result PNGs only; no external logos or fabricated product UI
+brand constraints: project-owned visuals only; use abstract network/video symbols and verified local charts
+QA gates: technically accurate architecture, readable executive simplification, no unsupported metrics, editable slides, package exists and renders
+known missing inputs: no formal reference deck or project screenshots were supplied

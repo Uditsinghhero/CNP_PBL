@@ -1,0 +1,9 @@
+1 cover with metric rail and architecture mini-flow
+2 dark risk matrix with network-condition axes
+3 full-width system architecture flow
+4 encoding ladder with segment lifecycle
+5 feature-to-model-to-quality map
+6 circular runtime control loop
+7 dashboard capability canvas
+8 results page with KPI rail and two generated graphs
+9 demo script and future work split rhythm

@@ -1,0 +1,9 @@
+Project source: C:\Users\acer\OneDrive\Desktop\CNP PBL
+README: defines project title, architecture components, setup, demo flow, and result generation.
+app.py: Flask app serving index, DASH segments, /api/ping, /api/qualities, /api/predict, /api/log.
+ai_model.py: RandomForestClassifier trained on synthetic network traces; inputs are throughput, previous throughput, buffer, latency, packet loss, jitter, current quality; outputs one of 240p/360p/720p/1080p with confidence and reason.
+generate_dash.py: packages video into 400k 240p, 1000k 360p, 2500k 720p, 6000k 1080p MPEG-DASH variants with 4-second segments.
+static/js/player.js: dash.js playback, AI toggle, simulated network profiles, 2-second control loop, charting, logging.
+analyze_results.py: produces bandwidth, bitrate, buffer, latency, and AI confidence graphs plus QoS summary.
+results/qos_summary.csv: 177 samples, 2.199 Mbps average throughput, 10.255s average buffer, 72.928ms average latency, 12 quality switches, 63 low-buffer events, 0.882 average AI confidence.
+Identity assets: none used. Local result charts are project-generated evidence assets.

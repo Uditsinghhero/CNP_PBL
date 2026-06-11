@@ -1,0 +1,18 @@
+primary deck-profile: engineering-platform
+profile gate: pass
+story: 5
+specificity: 5
+rhythm: 4
+whitespace: 4
+chart clarity: 4
+typography: 4
+restraint: 5
+precision: 4
+coherence: 5
+total: 40 / 45
+reference delta: n/a, no reference supplied
+package checks: pass; 9 slides, 2 media assets, 0 empty media entries
+render checks: pass; all 9 slides rendered to PNG
+layout checks: pass with 0 errors; remaining warnings are tight-label heuristics inspected visually
+tool/runtime caveat: artifact-tool build helper printed a complete success manifest but returned a non-zero process code on Windows; package and renders were verified independently
+remaining weak spot: result charts inherit the original matplotlib time scale from generated project outputs, so they are evidence-accurate but not fully redesigned as native editable charts

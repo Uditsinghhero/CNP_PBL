@@ -1,0 +1,12 @@
+slide size: 1280x720
+background: deep ink (#08111F) with off-white panels (#F6F2EA) for evidence slides
+typography: Aptos Display for claims, Aptos for body, Aptos Mono for code/metrics
+palette: ink #08111F, paper #F6F2EA, cyan #36D1DC, coral #FF6B5F, lime #B7F16A, gold #FFD166, muted slate #8EA3B8
+chart grammar: direct labels, thick signal lines, no decorative legends
+diagram grammar: left-to-right flow, semantic arrows only, numbered stage markers
+container grammar: thin hairline panels or filled evidence strips only when grouping data
+footer grammar: quiet source label at bottom-left, slide number bottom-right
+kicker grammar: small all-caps label with a 10px accent marker, named marker/label pairs
+brand policy: no logos; project-owned charts only
+layout families: cover metric rail, risk matrix, architecture flow, ladder diagram, model map, control-loop ring, capability canvas, results dashboard, demo roadmap
+banned motifs: stock images, pseudo-brand marks, gradient blobs, generic SaaS card wall
