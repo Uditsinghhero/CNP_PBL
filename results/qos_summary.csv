@@ -1,2 +1,2 @@
 samples,avg_throughput_mbps,avg_buffer_sec,avg_latency_ms,quality_switches,low_buffer_events,avg_ai_confidence
-177,2.199,10.255,72.928,12,63,0.882
+322,2.464,8.589,80.124,27,63,0.865
